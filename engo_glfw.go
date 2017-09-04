@@ -91,8 +91,15 @@ func CreateWindow(title string, width, height int, fullscreen bool, msaa int) {
 		glfw.WindowHint(glfw.Resizable, glfw.False)
 	}
 
-	glfw.WindowHint(glfw.ContextVersionMajor, 2)
-	glfw.WindowHint(glfw.ContextVersionMinor, 1)
+	if opts.OpenGLCoreProfile {
+		glfw.WindowHint(glfw.ContextVersionMajor, 4)
+		glfw.WindowHint(glfw.ContextVersionMinor, 1)
+		glfw.WindowHint(glfw.OpenGLForwardCompatible, glfw.True)
+		glfw.WindowHint(glfw.OpenGLProfile, glfw.OpenGLCoreProfile)
+	} else {
+		glfw.WindowHint(glfw.ContextVersionMajor, 2)
+		glfw.WindowHint(glfw.ContextVersionMinor, 1)
+	}
 
 	glfw.WindowHint(glfw.Samples, msaa)
 
